@@ -6,15 +6,16 @@ services:
     build:
       context: .
       dockerfile: ./docker/rails/Dockerfile
-    ports: 
+    ports:
       - ${WEB_PORT:-3000}:3000
     volumes:
       - ./backend:/work/backend
     environment:
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_USERNAME=${DB_USER:-postgres}
-      - DB_PASSWORD=${DB_PASS:-postgres}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASS=${DB_PASS:-postgres}
+      - PROJECT_NAME=${PROJECT_NAME:-graphql-example}
     depends_on:
       - db
     stdin_open: true
