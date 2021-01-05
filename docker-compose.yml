@@ -1,0 +1,30 @@
+version: "3.8"
+volumes:
+  db-store:
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
+    ports: 
+      - 3000:3000
+    volumes:
+      - ./backend:/work/backend
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+    depends_on:
+      - db
+    stdin_open: true
+
+  db:
+    image: postgres:13.1-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - db-store:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
