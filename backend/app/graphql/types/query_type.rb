@@ -3,11 +3,10 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    field :users, [Types::UserType], null: false
+
+    def users
+      User.all.select(:id, :name, :email, :user_id, :activated, :admin, :created_at, :updated_at)
     end
   end
 end
