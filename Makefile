@@ -13,7 +13,7 @@ update:
 	docker-compose exec app bundle update
 init:
 	@make bundle
-	docker-compose exec app rake create:db
+	docker-compose exec app rake db:create
 	@make migrate
 migrate:
 	docker-compose exec app rails db:migrate
