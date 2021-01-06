@@ -19,6 +19,8 @@ migrate:
 	docker-compose exec app rails db:migrate
 migrate-reset:
 	docker-compose exec app rails db:migrate:reset
+dbconsole:
+	docker-compose exec app rails dbconsole
 serve:
 	docker-compose exec app rails s -b 0.0.0.0
 app:
