@@ -15,7 +15,7 @@ services:
       - DB_PORT=5432
       - DB_USER=${DB_USER:-postgres}
       - DB_PASS=${DB_PASS:-postgres}
-      - PROJECT_NAME=${PROJECT_NAME:-graphql-example}
+      - PROJECT_NAME=${PROJECT_NAME:-graphql}
     depends_on:
       - db
     stdin_open: true
