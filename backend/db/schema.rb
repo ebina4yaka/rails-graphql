@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_003247) do
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
+    t.string "email", null: false
     t.string "user_id", null: false
     t.string "password_digest", null: false
     t.boolean "activated", default: false, null: false
