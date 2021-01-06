@@ -25,6 +25,8 @@ console:
 	docker-compose exec app rails c
 dbconsole:
 	docker-compose exec app rails dbconsole
+test:
+	docker-compose exec app rails t
 serve:
 	docker-compose exec app rails s -b 0.0.0.0
 app:
