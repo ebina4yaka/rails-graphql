@@ -10,7 +10,7 @@ ja:
     attributes:
       user:
         name: 名前
-        user_id: ユーザーID
+        screen_name: ユーザー名
         email: メールアドレス
         password: パスワード
         activated: アクティブフラグ

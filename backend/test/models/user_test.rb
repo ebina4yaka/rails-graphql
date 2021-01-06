@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "name_validation" do
     # not null
-    user = User.new(email: "test@example.com", user_id: "test", password: "password")
+    user = User.new(email: "test@example.com", screen_name: "test", password: "password")
     user.save
     required_msg = ["名前を入力してください"]
     assert_equal(required_msg, user.errors.full_messages)
@@ -28,7 +28,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "email_validation" do
     # not null
-    user = User.new(name: "test", user_id: "test", password: "password")
+    user = User.new(name: "test", screen_name: "test", password: "password")
     user.save
     required_msg = ["メールアドレスを入力してください"]
     assert_equal(required_msg, user.errors.full_messages)
@@ -81,20 +81,20 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test "user_id validation" do
+  test "screen_name validation" do
     # not null
     user = User.new(name: "test", email: "test@example.com", password: "password")
     user.save
-    required_msg = ["ユーザーIDを入力してください"]
+    required_msg = ["ユーザー名を入力してください"]
     assert_equal(required_msg, user.errors.full_messages)
 
     # unique
-    user.user_id = "test"
+    user.screen_name = "test"
     assert user.save
 
-    new_user = User.new(name: "test", email: "test@example.com", user_id: "test", password: "password")
+    new_user = User.new(name: "test", email: "test@example.com", screen_name: "test", password: "password")
     new_user.save
-    unique_msg = ["ユーザーIDはすでに存在します"]
+    unique_msg = ["ユーザー名はすでに存在します"]
     assert_equal(unique_msg, new_user.errors.full_messages)
   end
 
@@ -113,7 +113,7 @@ class UserTest < ActiveSupport::TestCase
     count = 3
     assert_difference("User.count", count) do
       count.times do |n|
-        User.create(name: "test", email: email ,user_id: "test_#{n}", password: "password")
+        User.create(name: "test", email: email ,screen_name: "test_#{n}", password: "password")
       end
     end
 
@@ -123,7 +123,7 @@ class UserTest < ActiveSupport::TestCase
     assert active_user.activated
 
     assert_no_difference("User.count") do
-      user = User.new(name: "test", email: email, user_id: "test", password: "password")
+      user = User.new(name: "test", email: email, screen_name: "test", password: "password")
       user.save
       uniqueness_msg = ["メールアドレスはすでに存在します"]
       assert_equal(uniqueness_msg, user.errors.full_messages)
@@ -132,7 +132,7 @@ class UserTest < ActiveSupport::TestCase
     # アクティブユーザーがいなくなった場合、ユーザーは保存できているか
     active_user.destroy!
     assert_difference("User.count", 1) do
-      User.create(name: "test", email: email, user_id: "test", password: "password", activated: true)
+      User.create(name: "test", email: email, screen_name: "test", password: "password", activated: true)
     end
 
     # 一意性は保たれているか
@@ -141,7 +141,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "password_validation" do
     # 入力必須
-    user = User.new(name: "test", email: "test@example.com", user_id: "test")
+    user = User.new(name: "test", email: "test@example.com", screen_name: "test")
     user.save
     required_msg = ["パスワードを入力してください"]
     assert_equal(required_msg, user.errors.full_messages)

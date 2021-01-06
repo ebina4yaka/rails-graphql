@@ -4,7 +4,7 @@ module Mutations
 
     argument :name, String, required: true
     argument :email, String, required: true
-    argument :user_id, String, required: true
+    argument :screen_name, String, required: true
     argument :password, String, required: true
 
     def resolve(**args)

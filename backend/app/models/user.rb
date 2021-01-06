@@ -1,7 +1,7 @@
 require "validator/email_validator"
 
 class User < ApplicationRecord
-  has_many :posts, foreign_key: :author_id, primary_key: :user_id
+  has_many :posts, foreign_key: :author_id
 
   before_validation :downcase_email
 
@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :email, presence: true,
             email: { allow_blank: true }
 
-  validates :user_id, presence: true,
+  validates :screen_name, presence: true,
             uniqueness: true
 
   VALID_PASSWORD_REGEX = /\A[\w\-]+\z/
