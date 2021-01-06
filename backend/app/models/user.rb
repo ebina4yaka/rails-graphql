@@ -1,6 +1,8 @@
 require "validator/email_validator"
 
 class User < ApplicationRecord
+  has_many :posts, foreign_key: :author_id, primary_key: :user_id
+
   before_validation :downcase_email
 
   # bcrypt
