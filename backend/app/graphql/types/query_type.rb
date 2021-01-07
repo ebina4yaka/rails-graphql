@@ -5,6 +5,7 @@ module Types
 
     field :users, [Types::UserType], null: false
     field :posts, [Types::PostType], null: false
+    field :viewer, Types::ViewerType, null: false
 
     def users
       User.all.select(:id, :name, :screen_name, :activated, :admin, :created_at, :updated_at)
@@ -12,6 +13,10 @@ module Types
 
     def posts
       Post.all
+    end
+
+    def viewer
+      context[:current_user] || {}
     end
   end
 end

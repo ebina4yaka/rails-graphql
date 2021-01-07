@@ -42,5 +42,6 @@ module Backend
     config.add_autoload_paths_to_load_path = false
 
     config.api_only = true
+    config.action_controller.default_protect_from_forgery = false
   end
 end

@@ -12,6 +12,10 @@ class GraphqlController < ApplicationController
       # Query context goes here, for example:
       # current_user: current_user,
     }
+    if request.headers[:authorization]
+      authenticate_user
+      context.merge!(current_user: current_user)
+    end
     result = BackendSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
