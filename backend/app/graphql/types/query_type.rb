@@ -4,9 +4,14 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :users, [Types::UserType], null: false
+    field :posts, [Types::PostType], null: false
 
     def users
-      User.all.select(:id, :name, :email, :user_id, :activated, :admin, :created_at, :updated_at)
+      User.all.select(:id, :name, :email, :screen_name, :activated, :admin, :created_at, :updated_at)
+    end
+
+    def posts
+      Post.all
     end
   end
 end
