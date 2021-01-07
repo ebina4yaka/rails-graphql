@@ -26,6 +26,7 @@ gem 'rack-cors'
 gem 'graphql'
 gem 'graphql-batch'
 gem 'graphiql-rails'
+gem 'graphdoc-ruby'
 gem 'knock'
 gem 'sprockets', '~> 3.7.2'
 

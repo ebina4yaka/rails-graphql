@@ -20,6 +20,8 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
 
 RUN apt-get update && apt-get install -y yarn postgresql-client-13 libpq-dev
 
+RUN yarn global add @2fd/graphdoc
+
 RUN gem install rails
 
 WORKDIR /work/backend
