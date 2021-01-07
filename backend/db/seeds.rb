@@ -8,6 +8,7 @@
 
 table_names = %w(
 users
+posts
 )
 
 table_names.each do |table_name|
