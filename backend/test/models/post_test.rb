@@ -49,7 +49,7 @@ class PostTest < ActiveSupport::TestCase
   test 'author_validation' do
     unactivated_user = User.new(name: "test", email: "test@example.com", screen_name: "test", password: "password")
     unactivated_user.save
-    post = unactivated_user.posts.build(title: 'Test title', content: 'Test content')
+    post = unactivated_user.posts.new(title: 'Test title', content: 'Test content')
     post.save
     unactivated_msg = ['投稿者はメールアドレスが認証されていません']
     assert_equal(unactivated_msg, post.errors.full_messages)
