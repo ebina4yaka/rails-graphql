@@ -17,12 +17,5 @@ module Mutations
         nil
       end
     end
-
-    def build_errors(user)
-      user.errors.each do |attr, message|
-        full_message = user.errors.full_message(attr, message)
-        context.add_error(GraphQL::ExecutionError.new(full_message, extensions: { code: 'USER_INPUT_ERROR', attribute: attr }))
-      end
-    end
   end
 end
