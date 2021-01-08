@@ -3,13 +3,13 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :users, [Types::UserType], null: false
+    field :users, Types::UserType::connection_type, null: false
     field :user, Types::UserType, null: true do
-      argument :screen_name, String, required: true
+      argument :screen_name, String, required: true, description: 'ユーザー名'
     end
-    field :posts, [Types::PostType], null: false
+    field :posts, Types::PostType::connection_type, null: false
     field :post, Types::PostType, null: true do
-      argument :id, Int, required: false
+      argument :id, Int, required: false, description: 'ID'
     end
     field :viewer, Types::ViewerType, null: true
 

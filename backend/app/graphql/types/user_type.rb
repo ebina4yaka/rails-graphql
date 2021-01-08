@@ -3,7 +3,7 @@ module Types
     field :id, ID, null: false
     field :name, String, null: false
     field :screen_name, String, null: false
-    field :posts, [PostType], null: false
+    field :posts, Types::PostType::connection_type, null: false
     field :activated, Boolean, null: false
     field :admin, Boolean, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
