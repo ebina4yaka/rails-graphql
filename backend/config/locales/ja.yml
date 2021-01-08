@@ -123,6 +123,7 @@ ja:
     format: "%{attribute}%{message}"
     messages:
       unactivated: はメールアドレスが認証されていません
+      invalid_screen_name: は半角英数字,-,_が使えます
       invalid_password: は半角英数字,-,_が使えます
       accepted: を受諾してください
       blank: を入力してください

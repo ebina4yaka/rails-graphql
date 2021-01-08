@@ -15,8 +15,15 @@ class User < ApplicationRecord
   validates :email, presence: true,
             email: { allow_blank: true }
 
+  VALID_SCREEN_NAME_REGEX = /\A[\w\-]+\z/
   validates :screen_name, presence: true,
-            uniqueness: true
+            uniqueness: true,
+            length: { minimum: 4, allow_blank: true },
+            format: {
+              with: VALID_SCREEN_NAME_REGEX,
+              message: :invalid_screen_name,
+              allow_blank: true
+            }
 
   VALID_PASSWORD_REGEX = /\A[\w\-]+\z/
   validates :password, presence: true,

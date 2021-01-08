@@ -89,6 +89,43 @@ class UserTest < ActiveSupport::TestCase
     required_msg = ['ユーザー名を入力してください']
     assert_equal(required_msg, user.errors.full_messages)
 
+    # length
+    min = 4
+    screen_name = 'a' * (min - 1)
+    user.screen_name = screen_name
+    user.save
+    required_msg = ['ユーザー名は4文字以上で入力してください']
+    assert_equal(required_msg, user.errors.full_messages)
+
+    # 書式チェック VALID_SCREEN_NAME_REGEX = /\A[\w\-]+\z/
+    ok_screen_names = %w(
+      screen---name
+      ________
+      12341234
+      ____name
+      name----
+      SCREEN_NAME
+    )
+    ok_screen_names.each do |pass|
+      user.screen_name = pass
+      assert user.save
+    end
+
+    ng_screen_names = %w(
+      screen/name
+      screen.name
+      |~=?+'a'
+      １２３４５６７８
+      ＡＢＣＤＥＦＧＨ
+      screen_name@
+    )
+    format_msg = ['ユーザー名は半角英数字,-,_が使えます']
+    ng_screen_names.each do |pass|
+      user.screen_name = pass
+      user.save
+      assert_equal(format_msg, user.errors.full_messages)
+    end
+
     # unique
     user.screen_name = 'test'
     assert user.save
