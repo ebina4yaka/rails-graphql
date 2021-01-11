@@ -4,9 +4,13 @@ down:
 	docker-compose down
 build:
 	docker-compose build --no-cache --force-rm
-restart:
+setup:
 	@make up
+	@make init
+restart:
 	@make down
+	@make up
+	@make init
 bundle:
 	docker-compose exec app bundle install
 update:
@@ -15,6 +19,8 @@ init:
 	@make bundle
 	docker-compose exec app rake db:create
 	@make migrate
+dump:
+	docker-compose exec app rake graphql:schema:dump
 migrate:
 	docker-compose exec app rails db:migrate
 migrate-reset:

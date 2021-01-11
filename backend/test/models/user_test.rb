@@ -1,11 +1,6 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  def after_setup
-    @user = active_user
-    @user = active_user
-  end
-
   test 'name_validation' do
     # not null
     user = User.new(email: 'test@example.com', screen_name: 'test', password: 'password')
@@ -82,7 +77,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  test 'screen_name validation' do
+  test 'screen_name_validation' do
     # not null
     user = User.new(name: 'test', email: 'test@example.com', password: 'password')
     user.save
