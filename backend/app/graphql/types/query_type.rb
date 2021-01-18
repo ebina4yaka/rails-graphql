@@ -7,7 +7,9 @@ module Types
     field :user, Types::UserType, null: true do
       argument :screen_name, String, required: true, description: 'ユーザー名'
     end
-    field :posts, Types::PostType::connection_type, null: false
+    field :posts, Types::PostType::connection_type, null: false do
+      argument :order_by, PostsOrderInput, required: false, description: 'ソート'
+    end
     field :post, Types::PostType, null: true do
       argument :id, Int, required: false, description: 'ID'
     end
@@ -21,7 +23,12 @@ module Types
       User.find_by(screen_name: screen_name)
     end
 
-    def posts
+    def posts(order_by_arguments = nil)
+      if order_by_arguments != nil
+        field = order_by_arguments[:order_by][:field]
+        direction = order_by_arguments[:order_by][:direction]
+        return Post.all.order("#{field} #{direction}")
+      end
       Post.all
     end
 

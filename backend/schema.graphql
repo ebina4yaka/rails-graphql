@@ -57,6 +57,18 @@ type Mutation {
   createUser(input: CreateUserInput!): CreateUserPayload
 }
 
+enum OrderDirection {
+  """
+  昇順ソート
+  """
+  ASC
+
+  """
+  降順ソート
+  """
+  DESC
+}
+
 """
 Information about pagination in a connection.
 """
@@ -126,6 +138,23 @@ type PostEdge {
   node: Post
 }
 
+input PostsOrderInput {
+  direction: OrderDirection
+  field: PostsOrderInputField
+}
+
+enum PostsOrderInputField {
+  """
+  投稿日
+  """
+  created_at
+
+  """
+  更新日
+  """
+  updated_at
+}
+
 type Query {
   post(
     """
@@ -153,6 +182,11 @@ type Query {
     Returns the last _n_ elements from the list.
     """
     last: Int
+
+    """
+    ソート
+    """
+    orderBy: PostsOrderInput
   ): PostConnection!
   user(
     """
