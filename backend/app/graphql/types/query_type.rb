@@ -25,7 +25,7 @@ module Types
 
     def posts(order_by_arguments = nil)
       if order_by_arguments != nil
-        field = order_by_arguments[:order_by][:field]
+        field = order_by_arguments[:order_by][:field].underscore
         direction = order_by_arguments[:order_by][:direction]
         return Post.all.order("#{field} #{direction}")
       end

@@ -147,12 +147,12 @@ enum PostsOrderInputField {
   """
   投稿日
   """
-  created_at
+  createdAt
 
   """
   更新日
   """
-  updated_at
+  updatedAt
 }
 
 type Query {

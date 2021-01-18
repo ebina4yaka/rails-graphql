@@ -737,13 +737,13 @@
           "interfaces": null,
           "enumValues": [
             {
-              "name": "created_at",
+              "name": "createdAt",
               "description": "投稿日",
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "updated_at",
+              "name": "updatedAt",
               "description": "更新日",
               "isDeprecated": false,
               "deprecationReason": null
