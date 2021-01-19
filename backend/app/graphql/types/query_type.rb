@@ -16,17 +16,17 @@ module Types
     field :viewer, Types::ViewerType, null: true
 
     def users
-      User.all.select(:id, :name, :screen_name, :activated, :admin, :created_at, :updated_at)
+      User.all
     end
 
     def user(screen_name:)
       User.find_by(screen_name: screen_name)
     end
 
-    def posts(order_by_arguments = nil)
-      if order_by_arguments != nil
-        field = order_by_arguments[:order_by][:field].underscore
-        direction = order_by_arguments[:order_by][:direction]
+    def posts(order_by: nil)
+      if order_by != nil
+        field = order_by[:field].underscore
+        direction = order_by[:direction]
         return Post.all.order("#{field} #{direction}")
       end
       Post.all

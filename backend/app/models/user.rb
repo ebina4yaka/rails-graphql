@@ -1,7 +1,7 @@
 require 'validator/email_validator'
 
 class User < ApplicationRecord
-  has_many :posts, foreign_key: :author_id, dependent: :destroy
+  has_many :posts, -> { order('created_at DESC') }, foreign_key: :author_id, dependent: :destroy
 
   before_validation :downcase_email
 
