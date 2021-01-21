@@ -3,6 +3,26 @@ require 'validator/email_validator'
 class User < ApplicationRecord
   has_many :posts, -> { order('created_at DESC') }, foreign_key: :author_id, dependent: :destroy
 
+  has_many :follows_relationships
+  has_many :followings, through: :follows_relationships, source: :follow
+  has_many :reverse_of_relationships, class_name: 'FollowsRelationship', foreign_key: 'follow_id'
+  has_many :followers, through: :reverse_of_relationships, source: :user
+
+  def follow(other_user)
+    unless self == other_user
+      self.follows_relationships.find_or_create_by(follow_id: other_user.id)
+    end
+  end
+
+  def unfollow(other_user)
+    relationship = self.follows_relationships.find_by(follow_id: other_user.id)
+    relationship.destroy if relationship
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
+
   before_validation :downcase_email
 
   # bcrypt
