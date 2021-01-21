@@ -4,6 +4,8 @@ module Types
     field :name, String, null: false
     field :screen_name, String, null: false
     field :posts, Types::PostType::connection_type, null: false
+    field :followings, Types::UserType::connection_type, null: false
+    field :followers, Types::UserType::connection_type, null: false
     field :activated, Boolean, null: false
     field :admin, Boolean, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -11,6 +13,14 @@ module Types
 
     def posts
       Loaders::AssociationLoader.for(User, :posts).load(object)
+    end
+
+    def followings
+      Loaders::AssociationLoader.for(User, :followings).load(object)
+    end
+
+    def followers
+      Loaders::AssociationLoader.for(User, :followers).load(object)
     end
   end
 end
