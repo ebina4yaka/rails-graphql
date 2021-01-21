@@ -834,6 +834,18 @@
                   "deprecationReason": null
                 },
                 {
+                  "name": "authorId",
+                  "description": "投稿者ID",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null,
+                  "isDeprecated": false,
+                  "deprecationReason": null
+                },
+                {
                   "name": "orderBy",
                   "description": "ソート",
                   "type": {

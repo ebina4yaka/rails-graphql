@@ -8,6 +8,7 @@ module Types
       argument :screen_name, String, required: true, description: 'ユーザー名'
     end
     field :posts, Types::PostType::connection_type, null: false do
+      argument :author_id, Int, required: false, description: '投稿者ID'
       argument :order_by, PostsOrderInput, required: false, description: 'ソート'
     end
     field :post, Types::PostType, null: true do
@@ -23,11 +24,19 @@ module Types
       User.find_by(screen_name: screen_name)
     end
 
-    def posts(order_by: nil)
+    def posts(author_id: nil, order_by: nil)
+      if author_id != nil && order_by != nil
+        field = order_by[:field].underscore
+        direction = order_by[:direction]
+        return Post.where(author_id: author_id).order("#{field} #{direction}")
+      end
+      if author_id != nil
+        return Post.where(author_id: author_id)
+      end
       if order_by != nil
         field = order_by[:field].underscore
         direction = order_by[:direction]
-        return Post.all.order("#{field} #{direction}")
+        return Post.order("#{field} #{direction}")
       end
       Post.all
     end
