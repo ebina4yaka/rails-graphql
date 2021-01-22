@@ -3,9 +3,10 @@ require 'validator/email_validator'
 class User < ApplicationRecord
   has_many :posts, -> { order('created_at DESC') }, foreign_key: :author_id, dependent: :destroy
 
-  has_many :follows_relationships
+  has_many :follows_relationships, -> { order('created_at DESC') }, dependent: :destroy
   has_many :followings, through: :follows_relationships, source: :follow
-  has_many :reverse_of_relationships, class_name: 'FollowsRelationship', foreign_key: 'follow_id'
+  has_many :reverse_of_relationships, -> { order('created_at DESC') },
+           class_name: 'FollowsRelationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :user
 
   def follow(other_user)
