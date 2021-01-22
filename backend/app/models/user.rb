@@ -9,6 +9,9 @@ class User < ApplicationRecord
            class_name: 'FollowsRelationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :user
 
+  has_many :likes_relationships, -> { order('created_at DESC') }, dependent: :destroy
+  has_many :like_posts, through: :likes_relationships, source: :post
+
   def follow(other_user)
     unless self == other_user
       self.follows_relationships.find_or_create_by(follow_id: other_user.id)
@@ -22,6 +25,21 @@ class User < ApplicationRecord
 
   def following?(other_user)
     self.followings.include?(other_user)
+  end
+
+  def like(post)
+    unless self.id == post.author_id
+      self.likes_relationships.find_or_create_by(post_id: post.id)
+    end
+  end
+
+  def unlike(post)
+    relationship = self.likes_relationships.find_by(post_id: post.id)
+    relationship.destroy if relationship
+  end
+
+  def liking?(post)
+    self.like_posts.include?(post)
   end
 
   before_validation :downcase_email
