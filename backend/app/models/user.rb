@@ -26,6 +26,21 @@ class User < ApplicationRecord
     self.followings.include?(other_user)
   end
 
+  def like(post)
+    unless self.id == post.author_id
+      self.likes_relationships.find_or_create_by(post_id: post.id)
+    end
+  end
+
+  def unlike(post)
+    relationship = self.likes_relationships.find_by(post_id: post.id)
+    relationship.destroy if relationship
+  end
+
+  def liking?(post)
+    self.like_posts.include?(post)
+  end
+
   before_validation :downcase_email
 
   # bcrypt
