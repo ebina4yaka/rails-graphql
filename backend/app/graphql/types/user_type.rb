@@ -6,6 +6,7 @@ module Types
     field :posts, Types::PostType::connection_type, null: false
     field :followings, Types::UserType::connection_type, null: false
     field :followers, Types::UserType::connection_type, null: false
+    field :like_posts, Types::PostType::connection_type, null: false
     field :activated, Boolean, null: false
     field :admin, Boolean, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -21,6 +22,10 @@ module Types
 
     def followers
       Loaders::AssociationLoader.for(User, :followers).load(object)
+    end
+
+    def like_posts
+      Loaders::AssociationLoader.for(User, :like_posts).load(object)
     end
   end
 end
