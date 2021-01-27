@@ -13,6 +13,10 @@ module Types
     field :followings, Types::UserType::connection_type, null: false do
       argument :user_id, Int, required: true, description: 'ユーザーID'
     end
+    field :is_following, Boolean, null: false do
+      argument :viewer_id, Int, required: true, description: 'ユーザーID'
+      argument :target_id, Int, required: true, description: 'ユーザーID'
+    end
     field :posts, Types::PostType::connection_type, null: false do
       argument :author_id, Int, required: false, description: '投稿者ID'
       argument :order_by, PostsOrderInput, required: false, description: 'ソート'
@@ -36,6 +40,10 @@ module Types
 
     def followings(user_id:)
       User.find_by(id: user_id).followings
+    end
+
+    def is_following(viewer_id:, target_id:)
+      User.find_by(id: viewer_id).following?(User.find_by(id: target_id))
     end
 
     def posts(author_id: nil, order_by: nil)
