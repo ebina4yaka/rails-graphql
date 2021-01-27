@@ -51,6 +51,7 @@ jobs:
         run: |
           rake db:create
           rails db:migrate
+        working-directory: ./backend
       - name: run tests
         run: rails t
         working-directory: ./backend
