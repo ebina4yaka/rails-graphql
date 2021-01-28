@@ -1,0 +1,57 @@
+name: Ruby Test
+
+on:
+  push:
+    branches:
+      - "feature/**"
+      - "fix/**"
+  pull_request:
+    branches:
+      - "develop"
+      - "main"
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:13-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    container:
+      image: ruby:3.0.0
+      env:
+        RAILS_ENV: test
+        DB_HOST: db
+        DB_PORT: 5432
+        DB_USER: postgres
+        DB_PASS: password
+        PROJECT_NAME: github_actions
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '15'
+      - name: bundler set up
+        run: |
+          gem install bundler
+          bundle install
+        working-directory: ./backend
+      - name: db migrate
+        run: |
+          rake db:create
+          rails db:migrate
+        working-directory: ./backend
+      - name: run tests
+        run: rails t
+        working-directory: ./backend
