@@ -9,6 +9,7 @@ module Types
     field :like_posts, Types::PostType::connection_type, null: false
     field :activated, Boolean, null: false
     field :admin, Boolean, null: false
+    field :biography, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
