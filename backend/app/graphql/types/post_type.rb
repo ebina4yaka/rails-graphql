@@ -2,6 +2,7 @@ module Types
   class PostType < Types::BaseObject
     field :id, ID, null: false
     field :title, String, null: false
+    field :image_url, String, null: false
     field :content, String, null: false
     field :author, UserType, null: false
     field :liked_users, UserType::connection_type, null: false
