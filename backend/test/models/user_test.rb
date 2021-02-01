@@ -222,4 +222,20 @@ class UserTest < ActiveSupport::TestCase
       assert_equal(format_msg, user.errors.full_messages)
     end
   end
+
+  test 'biography_validation' do
+    # length
+    user = User.new(name: 'test', email: 'test@example.com', screen_name: 'test', password: 'password')
+    max = 160
+    biography = 'a' * (max + 1)
+    user.biography = biography
+    user.save
+    maxlength_msg = ['プロフィールは160文字以内で入力してください']
+    assert_equal(maxlength_msg, user.errors.full_messages)
+    biography = 'あ' * max
+    user.biography = biography
+    assert_difference('User.count', 1) do
+      user.save
+    end
+  end
 end

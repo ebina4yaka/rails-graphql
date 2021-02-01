@@ -73,6 +73,9 @@ class User < ApplicationRecord
             },
             allow_blank: true
 
+  validates :biography, allow_blank: true,
+            length: { maximum: 160 }
+
   # methods
   class << self
     def find_activated(email)
