@@ -402,6 +402,7 @@ type UnlikePostPayload {
 type User {
   activated: Boolean!
   admin: Boolean!
+  avatarUrl: String!
   biography: String!
   createdAt: ISO8601DateTime!
   followers(
@@ -532,6 +533,7 @@ type UserEdge {
 type Viewer {
   activated: Boolean!
   admin: Boolean!
+  avatarUrl: String!
   biography: String!
   createdAt: ISO8601DateTime!
   email: String!

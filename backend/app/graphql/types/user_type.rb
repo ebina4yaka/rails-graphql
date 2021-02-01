@@ -10,6 +10,7 @@ module Types
     field :activated, Boolean, null: false
     field :admin, Boolean, null: false
     field :biography, String, null: false
+    field :avatar_url, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
