@@ -10,6 +10,8 @@ class Post < ApplicationRecord
   validates :title, presence: true,
             length: { maximum: 50, allow_blank: true }
 
+  validates :image_url, presence: true
+
   validates :content, presence: true,
             length: { maximum: 1000, allow_blank: true }
 
