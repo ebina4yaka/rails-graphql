@@ -147,6 +147,7 @@ type Post {
   content: String!
   createdAt: ISO8601DateTime!
   id: ID!
+  imageUrl: String!
   likedUsers(
     """
     Returns the elements in the list that come after the specified cursor.
