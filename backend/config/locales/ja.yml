@@ -16,6 +16,7 @@ ja:
         password_confirmation: パスワード(確認)
         activated: アクティブフラグ
         admin: 管理者フラグ
+        biography: プロフィール
       post:
         title: タイトル
         content: 本文
