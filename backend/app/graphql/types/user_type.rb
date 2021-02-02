@@ -11,6 +11,7 @@ module Types
     field :admin, Boolean, null: false
     field :biography, String, null: false
     field :avatar_url, String, null: false
+    field :followers_count, Int, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
@@ -28,6 +29,10 @@ module Types
 
     def like_posts
       Loaders::AssociationLoader.for(User, :like_posts).load(object)
+    end
+
+    def followers_count
+      Loaders::UserFollowersCountLoader.for.load(object.id)
     end
   end
 end
