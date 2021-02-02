@@ -1,4 +1,4 @@
-10.times do |n|
+100.times do |n|
   name = "user#{n}"
   email = "#{name}@example.com"
   screen_name = "user_#{n}"
@@ -16,6 +16,14 @@
   if user.new_record?
     user.password = "password"
     user.save!
+  end
+
+  unless User.first.nil?
+    first_user = User.first
+    user.follow(first_user)
+    user.save!
+    first_user.follow(user)
+    first_user.save!
   end
 end
 
