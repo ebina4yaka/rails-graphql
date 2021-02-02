@@ -169,6 +169,7 @@ type Post {
     """
     last: Int
   ): UserConnection!
+  likedUsersCount: Int!
   title: String!
   updatedAt: ISO8601DateTime!
 }
