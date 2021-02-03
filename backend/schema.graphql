@@ -169,6 +169,7 @@ type Post {
     """
     last: Int
   ): UserConnection!
+  likedUsersCount: Int!
   title: String!
   updatedAt: ISO8601DateTime!
 }
@@ -427,6 +428,7 @@ type User {
     """
     last: Int
   ): UserConnection!
+  followersCount: Int!
   followings(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -559,6 +561,7 @@ type Viewer {
     """
     last: Int
   ): UserConnection!
+  followersCount: Int!
   followings(
     """
     Returns the elements in the list that come after the specified cursor.
