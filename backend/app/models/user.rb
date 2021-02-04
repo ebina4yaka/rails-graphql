@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :likes_relationships, -> { order('created_at DESC') }, dependent: :destroy
   has_many :like_posts, through: :likes_relationships, source: :post
 
+  has_one_attached :avatar_image
+
   def follow(other_user)
     unless self == other_user
       self.follows_relationships.find_or_create_by(follow_id: other_user.id)

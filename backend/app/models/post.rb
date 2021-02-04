@@ -6,11 +6,11 @@ class Post < ApplicationRecord
   has_many :likes_relationships, -> { order('created_at DESC') }, dependent: :destroy
   has_many :liked_users, through: :likes_relationships, source: :user
 
+  has_one_attached :post_image
+
   # validates
   validates :title, presence: true,
             length: { maximum: 50, allow_blank: true }
-
-  validates :image_url, presence: true
 
   validates :content, presence: true,
             length: { maximum: 1000, allow_blank: true }

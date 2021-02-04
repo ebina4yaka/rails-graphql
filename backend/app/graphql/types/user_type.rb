@@ -10,10 +10,14 @@ module Types
     field :activated, Boolean, null: false
     field :admin, Boolean, null: false
     field :biography, String, null: false
-    field :avatar_url, String, null: false
+    field :avatar_url, String, null: true
     field :followers_count, Int, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    def avatar_url
+      url_for(object.avatar_image) if object.avatar_image.attached?
+    end
 
     def posts
       Loaders::AssociationLoader.for(User, :posts).load(object)
