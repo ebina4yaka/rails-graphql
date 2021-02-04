@@ -14,6 +14,8 @@ module Image
     end
   end
 
+  private
+
   def create_extension(image_base64)
     content_type = rex_image(image_base64)
     content_type[%r/\b(?!.*\/).*/]
