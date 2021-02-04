@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_03_232334) do
+ActiveRecord::Schema.define(version: 2021_02_04_005034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 2021_02_03_232334) do
     t.bigint "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image_url", default: "", null: false
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
@@ -83,7 +82,6 @@ ActiveRecord::Schema.define(version: 2021_02_03_232334) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "biography", default: "", null: false
-    t.string "avatar_url", default: "", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
