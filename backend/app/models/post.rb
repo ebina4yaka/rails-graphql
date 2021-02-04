@@ -1,6 +1,8 @@
 require 'validator/author_validator'
 
 class Post < ApplicationRecord
+  include Image
+
   belongs_to :author, class_name: 'User', foreign_key: :author_id
 
   has_many :likes_relationships, -> { order('created_at DESC') }, dependent: :destroy

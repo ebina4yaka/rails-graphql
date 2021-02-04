@@ -1,6 +1,8 @@
 require 'validator/email_validator'
 
 class User < ApplicationRecord
+  include Image
+
   has_many :posts, -> { order('created_at DESC') }, foreign_key: :author_id, dependent: :destroy
 
   has_many :follows_relationships, -> { order('created_at DESC') }, dependent: :destroy
