@@ -1,10 +1,12 @@
 users = User.all
 users.each do |user|
-  10.times do |n|
+  5.times do |n|
     post = user.posts.new
     post.title = "#{user.name}'s Post #{n}"
     post.content = "#{user.name}'s Post #{n} content text"
-    post.save!
+    if post.save!
+      post.post_image.attach(io: File.open("db/seeds/images/posts/post_#{n + 1}.jpg"), filename: "post_#{n + 1}.jpg")
+    end
     unless Post.first.nil?
       user.like(Post.first)
       user.save!

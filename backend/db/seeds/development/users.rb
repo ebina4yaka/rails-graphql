@@ -1,4 +1,4 @@
-100.times do |n|
+60.times do |n|
   name = "user#{n}"
   email = "#{name}@example.com"
   screen_name = "user_#{n}"
@@ -13,7 +13,9 @@
 
   if user.new_record?
     user.password = "password"
-    user.save!
+    if user.save!
+      user.avatar_image.attach(io: File.open("db/seeds/images/users/user_#{n + 1}.jpg"), filename: "avatar_#{n + 1}.jpg")
+    end
   end
 
   unless User.first.nil?
