@@ -1,5 +1,5 @@
 module Loaders
-  class RecordLoader < GraphQL::Batch::Loader
+  class RecordLoader < BaseLoader
     def initialize(model, column: model.primary_key, where: nil)
       @model = model
       @column = column.to_s

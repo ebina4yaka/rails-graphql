@@ -10,10 +10,8 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
-    include Types::ImageUrl
-
     def image_url
-      url_for(object.post_image) if object.post_image.attached?
+      Loaders::PostImageUrlLoader.for.load(object.id)
     end
 
     def author

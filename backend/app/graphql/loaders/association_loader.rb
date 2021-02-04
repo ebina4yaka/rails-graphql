@@ -1,5 +1,5 @@
 module Loaders
-  class AssociationLoader < GraphQL::Batch::Loader
+  class AssociationLoader < BaseLoader
     def self.validate(model, association_name)
       new(model, association_name)
       nil

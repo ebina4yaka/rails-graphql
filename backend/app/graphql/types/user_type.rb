@@ -15,10 +15,8 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
-    include Types::ImageUrl
-
     def avatar_url
-      url_for(object.avatar_image) if object.avatar_image.attached?
+      Loaders::UserAvatarUrlLoader.for.load(object.id)
     end
 
     def posts
