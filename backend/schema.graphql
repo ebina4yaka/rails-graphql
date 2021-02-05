@@ -7,6 +7,7 @@ input CreatePostInput {
   """
   clientMutationId: String
   content: String!
+  imageBase64: String!
   title: String!
 }
 
@@ -147,7 +148,7 @@ type Post {
   content: String!
   createdAt: ISO8601DateTime!
   id: ID!
-  imageUrl: String!
+  imageUrl: String
   likedUsers(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -404,7 +405,7 @@ type UnlikePostPayload {
 type User {
   activated: Boolean!
   admin: Boolean!
-  avatarUrl: String!
+  avatarUrl: String
   biography: String!
   createdAt: ISO8601DateTime!
   followers(
@@ -536,7 +537,7 @@ type UserEdge {
 type Viewer {
   activated: Boolean!
   admin: Boolean!
-  avatarUrl: String!
+  avatarUrl: String
   biography: String!
   createdAt: ISO8601DateTime!
   email: String!
