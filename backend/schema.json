@@ -444,7 +444,7 @@
               "deprecationReason": null
             },
             {
-              "name": "isLiking",
+              "name": "isLiked",
               "description": null,
               "args": [
 
@@ -1784,7 +1784,7 @@
               "deprecationReason": null
             },
             {
-              "name": "isLiking",
+              "name": "isLiked",
               "description": null,
               "args": [
 

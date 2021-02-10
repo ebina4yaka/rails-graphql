@@ -94,7 +94,7 @@ type LikePostPayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  isLiking: Boolean
+  isLiked: Boolean
 }
 
 type Mutation {
@@ -410,7 +410,7 @@ type UnlikePostPayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  isLiking: Boolean
+  isLiked: Boolean
 }
 
 type User {
