@@ -1,6 +1,6 @@
 module Mutations
   class UnlikePost < BaseMutation
-    field :isLiking, Boolean, null: true
+    field :isLiked, Boolean, null: true
 
     argument :post_id, Int, required: true
 
@@ -16,10 +16,10 @@ module Mutations
       end
       like_posts = user.unlike(like_post)
       if like_posts.nil?
-        return { isLiking: false }
+        return { isLiked: false }
       end
       if like_posts.destroy
-        { isLiking: false }
+        { isLiked: false }
       else
         build_errors(like_posts)
         nil

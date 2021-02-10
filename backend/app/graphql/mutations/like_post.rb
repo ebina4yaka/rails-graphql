@@ -1,6 +1,6 @@
 module Mutations
   class LikePost < BaseMutation
-    field :isLiking, Boolean, null: true
+    field :isLiked, Boolean, null: true
 
     argument :post_id, Int, required: true
 
@@ -19,7 +19,7 @@ module Mutations
         return nil
       end
       if like_posts.save
-        { isLiking: true }
+        { isLiked: true }
       else
         build_errors(like_posts)
         nil
