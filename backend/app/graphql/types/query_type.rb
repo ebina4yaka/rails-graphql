@@ -17,6 +17,10 @@ module Types
       argument :viewer_id, Int, required: true, description: 'ユーザーID'
       argument :target_id, Int, required: true, description: 'ユーザーID'
     end
+    field :is_liked, Boolean, null: false do
+      argument :viewer_id, Int, required: true, description: 'ユーザーID'
+      argument :post_id, Int, required: true, description: '投稿ID'
+    end
     field :posts, Types::PostType::connection_type, null: false do
       argument :author_id, Int, required: false, description: '投稿者ID'
       argument :order_by, PostsOrderInput, required: false, description: 'ソート'
@@ -44,6 +48,10 @@ module Types
 
     def is_following(viewer_id:, target_id:)
       User.find_by(id: viewer_id).following?(User.find_by(id: target_id))
+    end
+
+    def is_liked(viewer_id:, post_id:)
+      User.find_by(id: viewer_id).liking?(Post.find_by(id: post_id))
     end
 
     def posts(author_id: nil, order_by: nil)

@@ -291,6 +291,17 @@ type Query {
     """
     viewerId: Int!
   ): Boolean!
+  isLiked(
+    """
+    投稿ID
+    """
+    postId: Int!
+
+    """
+    ユーザーID
+    """
+    viewerId: Int!
+  ): Boolean!
   post(
     """
     ID
