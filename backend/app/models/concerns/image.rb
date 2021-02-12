@@ -1,12 +1,12 @@
 module Image
   extend ActiveSupport::Concern
 
-  def parse_base64(image_base64, attach_object)
-    if image_base64.present? || rex_image(image_base64) == ''
+  def attach_from_base64(image_base64, attach_object)
+    if image_base64.present?
       content_type = create_extension(image_base64)
       contents = image_base64.sub %r/data:((images|application)\/.{3,}),/, ''
       decoded_data = Base64.decode64(contents)
-      filename = "#{Time.zone.now.to_s}.#{content_type}"
+      filename = get_filename(content_type)
       File.open("#{Rails.root}/tmp/#{filename}", 'wb') do |f|
         f.write(decoded_data)
       end
@@ -15,6 +15,10 @@ module Image
   end
 
   private
+
+  def get_filename(content_type)
+    "#{Time.zone.now.to_s}.#{content_type}"
+  end
 
   def create_extension(image_base64)
     content_type = rex_image(image_base64)

@@ -8,7 +8,11 @@ module Mutations
     object_class Types::BaseObject
 
     def authorization_error
-      ErrorsHelper.authorization_error(context)
+      ErrorsHelper.add_error_to_context(context, '認証エラー', 'AUTHORIZATION_ERROR')
+    end
+
+    def image_not_found_error
+      ErrorsHelper.add_error_to_context(context, '画像がありません', 'IMAGE_NOT_FOUND_ERROR')
     end
 
     def build_errors(type)

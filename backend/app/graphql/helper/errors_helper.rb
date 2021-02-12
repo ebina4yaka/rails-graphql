@@ -6,7 +6,7 @@ class ErrorsHelper
     end
   end
 
-  def self.authorization_error(context)
-    context.add_error(GraphQL::ExecutionError.new('認証エラー', extensions: { code: 'AUTHORIZATION_ERROR' }))
+  def self.add_error_to_context(context, message, code)
+    context.add_error(GraphQL::ExecutionError.new(message, extensions: { code: code }))
   end
 end

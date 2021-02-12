@@ -1,5 +1,3 @@
-require_relative '../helper/errors_helper'
-
 module Mutations
   class CreatePost < BaseMutation
     field :post, Types::PostType, null: true
@@ -14,9 +12,17 @@ module Mutations
         authorization_error
         return nil
       end
+      unless args[:image_base64].present?
+        image_not_found_error
+        return nil
+      end
       post = user.posts.new(title: args[:title], content: args[:content])
       if post.save
-        post.parse_base64(args[:image_base64], post.post_image)
+        begin
+          post.attach_from_base64(args[:image_base64], post.post_image)
+        rescue
+          post.destroy
+        end
         { post: post }
       else
         build_errors(post)
