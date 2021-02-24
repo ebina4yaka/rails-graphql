@@ -4,7 +4,7 @@ module Image
   def attach_from_base64(image_base64, attach_object)
     if image_base64.present?
       content_type = create_extension(image_base64)
-      contents = image_base64.sub %r/data:((images|application)\/.{3,}),/, ''
+      contents = image_base64.sub %r/data:((image|application)\/.{3,}),/, ''
       decoded_data = Base64.decode64(contents)
       filename = get_filename(content_type)
       File.open("#{Rails.root}/tmp/#{filename}", 'wb') do |f|
